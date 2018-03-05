@@ -14,10 +14,11 @@ size = w_px, h_px
 list_formats = ("jpg", "png", "jpeg")
 for i,file in enumerate(os.listdir(directory)):
     is_image = False
-    #Obtem o formato do arquivo
+    #Obtem o arquivo em STR
     file_format = str(file, 'utf-8')
     #Obtem o nome do arquivo
     file_name = file_format.split(".")[0]
+    #Obtem o formato do arquivo
     file_format = file_format.split(".")[-1]
     for f in list_formats:
         if(file_format == f):
