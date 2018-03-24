@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from PIL import Image
 from fpdf import FPDF
 import os
