@@ -36,7 +36,7 @@ for i,file in enumerate(os.listdir(directory)):
         #print(directory)
         #Abre a imagem
         im = Image.open("{}/{}".format(directory, file))
-    print(im)
+        #print(im)
         #Redimensiona a imagem para o tamanho escolhido
         im_resized = im.resize(size, Image.ANTIALIAS)
         #Verifica se existe a pasta "imgs". Se nao, ele cria.
