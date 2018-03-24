@@ -6,14 +6,15 @@ import pathlib
 import time
 #Obtem o diretorio atual. Supoe-se que o script esta na mesma pasta das imagens para serem redimensionadas.
 directory = os.path.dirname(os.path.abspath(__file__))
+imgs_reduzidas = directory + "/imgs_reduzidas/"
 print(directory)
 pdf = FPDF(format="A4")
 pdf.set_compression(False)
 #result = pathlib.Path('imgs_reduzidas/').mkdir(exist_ok=True)
 try:
-	os.stat('imgs_reduzidas/')
+    os.stat(imgs_reduzidas)
 except:
-	os.mkdir('imgs_reduzidas/')
+    os.mkdir(imgs_reduzidas)
 w = int(input("Insira a largura da imagem (cm): "))
 h = int(input("Insira a altura da imagem (cm): "))
 #Converte CM para Pixels
@@ -32,15 +33,15 @@ for i,file in enumerate(os.listdir(directory)):
             is_image = True
             break
     if(is_image):
-	print(directory)
+    print(directory)
         #Abre a imagem
         im = Image.open("{}/{}".format(directory, file))
-	print(im)
+    print(im)
         #Redimensiona a imagem para o tamanho escolhido
         im_resized = im.resize(size, Image.ANTIALIAS)
         #Verifica se existe a pasta "imgs". Se nao, ele cria.
         #Salva a imagem.
-        im_resized.save("imgs_reduzidas/redimensionado_{}{}".format(file_name[0],file_name[1]))
+        im_resized.save("{}/redimensionado_{}{}".format(imgs_reduzidas,file_name[0],file_name[1]))
     else:
         #Imprime mensagem dos formatos que encontrou e nao foram suportados.
         print("O formato do arquivo {}{} nao e suportado.".format(file_name[0],file_name[1]))
@@ -52,7 +53,7 @@ j = 0
 w_px = w_px/3.7
 h_px = h_px/3.7
 #percorre as imagens dentro do diretorio criado
-for i,image in enumerate(os.listdir('imgs_reduzidas')):
+for i,image in enumerate(os.listdir(imgs_reduzidas)):
     #So serao criado 6 elementos por folha
     if(i % 6 == 0):
         x, y = 10,10
@@ -63,15 +64,15 @@ for i,image in enumerate(os.listdir('imgs_reduzidas')):
     if (j == 2):
         j=0
         y += h_px + 4
-        pdf.image('imgs_reduzidas/{}'.format(image),x,y,w_px,h_px)
+        pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
         j+=1
     else:
         #Verifica se eh o primeiro elemento da linha.
         if(j==0):
-            pdf.image('imgs_reduzidas/{}'.format(image),x,y,w_px,h_px)
+            pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
         else:
         #Caso nao, faz o espacamento horizontal.
-            pdf.image('imgs_reduzidas/{}'.format(image),x+w_px+4,y,w_px,h_px)
+            pdf.image('{}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
         j+=1
 #Cria o PDF na pasta raiz com o nome indicado
-pdf.output("imagens_reduzidas.pdf", "F")
+pdf.output("{}/imagens_reduzidas.pdf".format(directory), "F")
