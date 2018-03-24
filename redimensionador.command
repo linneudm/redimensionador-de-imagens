@@ -61,7 +61,7 @@ for i,image in enumerate(os.listdir(imgs_reduzidas)):
     if (j == 2):
         j=0
         y += h_px + 4
-        pdf.image('{}/{}'.format(image),x,y,w_px,h_px)
+        pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
         j+=1
     else:
         #Verifica se eh o primeiro elemento da linha.
@@ -72,4 +72,4 @@ for i,image in enumerate(os.listdir(imgs_reduzidas)):
             pdf.image('{}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
         j+=1
 #Cria o PDF na pasta raiz com o nome indicado
-pdf.output("{}/imagens_reduzidas.pdf".format(imgs_reduzidas), "F")
+pdf.output("{}/imagens_reduzidas.pdf".format(directory), "F")
