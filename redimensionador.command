@@ -69,7 +69,7 @@ for i,image in enumerate(os.listdir(imgs_reduzidas)):
             pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
         else:
         #Caso nao, faz o espacamento horizontal.
-            pdf.image('{}}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
+            pdf.image('{}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
         j+=1
 #Cria o PDF na pasta raiz com o nome indicado
 pdf.output("{}/imagens_reduzidas.pdf".format(imgs_reduzidas), "F")
