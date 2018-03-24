@@ -33,7 +33,7 @@ for i,file in enumerate(os.listdir(directory)):
             is_image = True
             break
     if(is_image):
-    print(directory)
+        #print(directory)
         #Abre a imagem
         im = Image.open("{}/{}".format(directory, file))
     print(im)
