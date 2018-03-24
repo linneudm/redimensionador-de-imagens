@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from PIL import Image
 from fpdf import FPDF
 import os
@@ -7,10 +6,8 @@ import time
 #Obtem o diretorio atual. Supoe-se que o script esta na mesma pasta das imagens para serem redimensionadas.
 directory = os.path.dirname(os.path.abspath(__file__))
 imgs_reduzidas = directory + "/imgs_reduzidas/"
-print(directory)
 pdf = FPDF(format="A4")
 pdf.set_compression(False)
-#result = pathlib.Path('imgs_reduzidas/').mkdir(exist_ok=True)
 try:
     os.stat(imgs_reduzidas)
 except:
@@ -33,10 +30,8 @@ for i,file in enumerate(os.listdir(directory)):
             is_image = True
             break
     if(is_image):
-        #print(directory)
         #Abre a imagem
         im = Image.open("{}/{}".format(directory, file))
-        #print(im)
         #Redimensiona a imagem para o tamanho escolhido
         im_resized = im.resize(size, Image.ANTIALIAS)
         #Verifica se existe a pasta "imgs". Se nao, ele cria.
@@ -64,7 +59,7 @@ for i,image in enumerate(os.listdir(imgs_reduzidas)):
     if (j == 2):
         j=0
         y += h_px + 4
-        pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
+        pdf.image('{}/{}'.format(image),x,y,w_px,h_px)
         j+=1
     else:
         #Verifica se eh o primeiro elemento da linha.
@@ -72,7 +67,7 @@ for i,image in enumerate(os.listdir(imgs_reduzidas)):
             pdf.image('{}/{}'.format(imgs_reduzidas,image),x,y,w_px,h_px)
         else:
         #Caso nao, faz o espacamento horizontal.
-            pdf.image('{}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
+            pdf.image('{}}/{}'.format(imgs_reduzidas,image),x+w_px+4,y,w_px,h_px)
         j+=1
 #Cria o PDF na pasta raiz com o nome indicado
-pdf.output("{}/imagens_reduzidas.pdf".format(directory), "F")
+pdf.output("{}/imagens_reduzidas.pdf".format(imgs_reduzidas), "F")
